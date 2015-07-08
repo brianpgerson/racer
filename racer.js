@@ -20,5 +20,7 @@ function updatePlayerPosition(event){
 function checkForFinish(position, player){
 	if (finish - position == 0){
 		alert(player + " won!");
+		p1 = 0;
+		p2 = 0;
 	}
 }
