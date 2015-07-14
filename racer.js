@@ -1,9 +1,27 @@
-document.addEventListener('keypress', updatePlayerPosition);
-
 var p1 = 0;
 var p2 = 0;
-var finish = 5;
+var finish = 2;
 
+document.addEventListener('keypress', updatePlayerPosition);
+
+// body.addEventListener("load", setUpTrack(finish));
+
+
+function setUpTrack(finish) {
+	var track1 = document.getElementById("player1");
+	var track2 = document.getElementById("player2");
+	track1.innerHTML = createRows(finish);
+	track2.innerHTML = createRows(finish);
+}
+
+function createRows(howMany){
+	var indyPiece = "<li><div class='piece'></div></li>"
+	var trackHTML = "";
+	for (i=0;i<=howMany-1;i++){
+		trackHTML+=indyPiece;
+	}
+	return trackHTML;
+}
 
 function updatePlayerPosition(event){
 	if (event.charCode == 112){
@@ -23,6 +41,10 @@ function checkForFinish(position, player){
 		alert(player + " won!");
 		p1 = 0;
 		p2 = 0;
+		var finalPositions = document.querySelectorAll(".active");
+		finalPositions[0].setAttribute("class", "piece");
+		finalPositions[1].setAttribute("class", "piece");
+
 	}
 }
 
