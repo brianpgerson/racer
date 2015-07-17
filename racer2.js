@@ -25,6 +25,8 @@ function getCharacters(){
 	var characters = [];
 	for (i=0; i<nodeList.length; i++){
 		characters.push(nodeList[i].value);
+		console.log(characters);
+
 	}
 	
 	return characters;
@@ -35,7 +37,7 @@ function createInputFields(event, value){
 	var howManyFields = event.target.selectedIndex;
 	resetInputField(keyInputFields);
 	for (i=0; i < howManyFields; i++){
-		var fieldHTML = "<br /><label for='player"+i+"'>Key for Player "+(i+1)+":</label><input type='text' class='player'><br />";
+		var fieldHTML = "<br /><label for='player"+i+"'>Key for Player "+(i+1)+": </label><input type='text' class='player'><br />";
 		keyInputFields.innerHTML += fieldHTML;
 	}
 }
@@ -57,8 +59,23 @@ function Player(id, charCode){
 
 function playerCreate(characters){
 	return characters.map(function(letter, index){
-		return new Player(index, letter.charCodeAt());
+		return new Player(index, sanitizeInputs(letter));
 	}); 
 }
+
+function sanitizeInputs(letter){
+	if (letter.length > 1 || letter == null){
+		alert("Please enter ONE lower case letter a - z, you dummy");
+	} else {
+		if (letter.charCodeAt() > 89 && letter.charCodeAt() < 123) {	
+			return letter.charCodeAt();
+		} else if (letter.charCodeAt() < 90 && letter.charCodeAt() > 64) {
+			return (letter.charCodeAt() + 32);
+		} else {
+			alert("Please enter a lower case letter a - z, you dummy.");
+		}
+	}
+}
+
 
 
