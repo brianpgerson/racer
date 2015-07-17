@@ -6,8 +6,12 @@ window.addEventListener('load', init);
 // ==============================
 
 function init() {
-	var playersDropDown = document.getElementById("playersDropDown");
-	playersDropDown.addEventListener("change", createInputFields, false);
+	document.getElementById("playersDropDown").addEventListener("change", createInputFields, false);
+	document.getElementById("init").addEventListener("click", handleInitializeClick, false);
+}
+
+function handleInitializeClick(){
+	console.log(playerCreate(getCharacters()));
 }
 
 function resetInputField(nodeList){
@@ -18,12 +22,12 @@ function resetInputField(nodeList){
 
 function getCharacters(){
 	var nodeList = document.querySelectorAll('.player');
-	var charArray = [];
+	var characters = [];
 	for (i=0; i<nodeList.length; i++){
-		charArray.push(nodeList[i].value);
+		characters.push(nodeList[i].value);
 	}
 	
-	return charArray;
+	return characters;
 }
 
 function createInputFields(event, value){
@@ -51,9 +55,9 @@ function Player(id, charCode){
 // CONTROLLER CODE
 // ==============================
 
-function playerCreate(array){
-	return array.map(function(currentValue, index){
-		return new Player(index, currentValue);
+function playerCreate(characters){
+	return characters.map(function(letter, index){
+		return new Player(index, letter.charCodeAt());
 	}); 
 }
 
