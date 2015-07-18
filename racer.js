@@ -3,7 +3,9 @@ document.addEventListener('keypress', updatePlayerPosition);
 var playerPositions = createInitPositions(playerNum);
 p1 = 0;
 p2 = 0;
-var trackLength = 5;
+players = [0, 0];
+
+var trackLength = 10;
 var playerNum = 2;
 var w = playerNum*124;
 
