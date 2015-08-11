@@ -1,25 +1,27 @@
 <html>
 <head>	
 	<title>Racer</title>
+	<link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="racer2.js"></script>
-  <link rel="stylesheet" href="racer.css">
+	<link rel="stylesheet" href="racer.css">
 
 </head>
 <body>
 	<h1>Let's Race, Biatch</h1>
 
 	<div id = "input">
-		
-		<label for="players">Players:</label>
-		<select id="playersDropDown">
-         	<option value='' disabled selected style='display:none;'>How many?!</option>
-         	<option value="1">1</option>
-			<option value="2">2</option>     
-         	<option value="3">3</option>
-			<option value="4">4</option>     
-			<option value="5">5</option>     
-		</select>
-		<input type="submit" id="init" value="Initialize!"/>
+		<div id = "dropbox">
+			<label for="players">How Many Players:</label>
+			<select id="playersDropDown">
+				<option value='' disabled selected style='display:none;'>?</option>
+				<option value="1">1</option>
+				<option value="2">2</option>     
+				<option value="3">3</option>
+				<option value="4">4</option>     
+				<option value="5">5</option>     
+			</select>
+		</div>
+		<input type="submit" id="init" value="Initialize!" class = "hidden"/>
 
 		<div id = "playerKeys">
 
@@ -28,7 +30,7 @@
 		<br />
 		<br />
 
-     </div>
+	</div>
 	<div id = "track">
 	</div>
 </body>

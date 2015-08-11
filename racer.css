@@ -4,8 +4,17 @@
 	overflow: hidden
 }
 
+#input {
+	width: 300px;
+	margin: auto;
+}
+
 .hidden{
 	display: none;
+}
+
+.shown{
+	display: block;
 }
 
 .piece {
@@ -16,6 +25,15 @@
 	background-size: cover;
 	float: left;
 	margin: 2px;
+}
+
+#playersDropDown {
+	width: 50px;
+}
+
+#dropbox {
+	width: 210px;
+	margin: auto;
 }
 
 #player1 .piece.active {
@@ -29,6 +47,11 @@
 
 }
 
+input[type=submit] {
+	margin: 10px auto;	
+	text-align: center;
+}
+
 li {
 	list-style: none;
 }
@@ -40,7 +63,7 @@ ul {
 }
 
 body {
-	font-family: "comic sans ms";
+	font-family: 'Permanent Marker' 'Comic Sans MS';
 	background: #f0f9ff; /* Old browsers */
 	background: -moz-linear-gradient(-45deg,  #f0f9ff 0%, #cbebff 47%, #19aaff 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#f0f9ff), color-stop(47%,#cbebff), color-stop(100%,#19aaff)); /* Chrome,Safari4+ */
@@ -54,5 +77,6 @@ body {
 
 h1 {
 	text-align: center;
-	margin-top: 1.2em;
+	font-size: 72px;
+	margin-top: .5em;
 }

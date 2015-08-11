@@ -1,18 +1,20 @@
-window.addEventListener('load', init);
+window.addEventListener('load', bindEventListeners);
 
 
 // ==============================
 // VIEW CODE
 // ==============================
 
+
+
 function handleInitializeClick(){
-	console.log(playerCreate(getCharacters()));
-	var playerObject = playerCreate(getCharacters());
+	var players = playerCreate(getCharacters());
 	hide(document.getElementById("input"));
-	setUpTrack(playerObject.length);
+	setUpTrack(players.length);
+	document.addEventListener('keypress', updatePlayerPosition);
 }
 
-function init() {
+function bindEventListeners() {
 	document.getElementById("playersDropDown").addEventListener("change", createInputFields, false);
 	document.getElementById("init").addEventListener("click", handleInitializeClick, false);
 }
@@ -22,7 +24,6 @@ function getCharacters(){
 	var characters = [];
 	for (i=0; i<nodeList.length; i++){
 		characters.push(nodeList[i].value);
-		console.log(characters);
 	}
 	return characters;
 }
@@ -39,17 +40,22 @@ function resetInputField(nodeList){
 }
 
 function createInputFields(event, value){
-	var keyInputFields = document.getElementById("playerKeys");
-	var howManyFields = event.target.selectedIndex;
-	resetInputField(keyInputFields);
-	for (i=0; i < howManyFields; i++){
+	show(document.getElementById("init"));
+	resetInputField(document.getElementById("playerKeys"));
+	document.getElementById("playerKeys").innerHTML = "<p>Please select a letter to press for your racer to move forward:</p>"
+
+	for (i=0; i < event.target.selectedIndex; i++){
 		var fieldHTML = "<br /><label for='player"+i+"'>Key for Player "+(i+1)+": </label><input type='text' class='player'><br />";
-		keyInputFields.innerHTML += fieldHTML;
+		document.getElementById("playerKeys").innerHTML += fieldHTML;
 	}
 }
 
 function hide(section){
 	section.setAttribute("class", "hidden");
+}
+
+function show(section){
+	section.setAttribute("class", "shown");
 }
 
 //----------------
@@ -58,19 +64,18 @@ function hide(section){
 
 function setUpTrack(playerNum) {
 	var trackLength = 5;
-	var block = createRows(trackLength);
-	var course = document.getElementById("track");
-	var playerColumns = "<ul class = 'players' id = 'player"+i+"'>" + block + "</ul>";
+	var block = createColumn(trackLength);
 	for (i=0;i<playerNum;i++){
-		course.innerHTML += playerColumns;
+		var playerColumns = "<ul class = 'players' id = 'player"+i+"'>" + block + "</ul>";
+		document.getElementById("track").innerHTML += playerColumns;
 	}
 	document.getElementById('track').setAttribute("style","width:" + (playerNum*124) + "px;");
 }
 
-function createRows(howMany){
+function createColumn(playerNum){
 	var indyPiece = "<li><div class='piece'></div></li>"
 	var trackHTML = "";
-	for (i=0;i<=howMany-1;i++){
+	for (i=0;i<=playerNum-1;i++){
 		trackHTML+=indyPiece;
 	}
 	return trackHTML;
@@ -81,6 +86,8 @@ function createRows(howMany){
 // ==============================
 // MODEL CODE
 // ==============================
+
+var players;
 
 function Player(id, charCode){
 	this.id = id;
@@ -93,20 +100,15 @@ function Player(id, charCode){
 // ==============================
 
 function playerCreate(characters){
-	return characters.map(function(letter, index){
+	players = characters.map(function(letter, index){
 		return new Player(index, sanitizeInputs(letter));
 	}); 
+	return players;
 }
-
-    var alerted = localStorage.getItem('alerted') || '';
-    if (alerted != 'yes') {
-     alert("My alert.");
-     localStorage.setItem('alerted','yes');
-    }
 
 function sanitizeInputs(letter){
 
-	if (letter.length > 1 || letter == null){
+	if (letter.length > 1 || letter === ""){
 		alert("Please enter ONE lower case letter a - z, you dummy");
 		window.location.reload(false); 
 	} 
@@ -124,5 +126,13 @@ function sanitizeInputs(letter){
 	}
 }
 
+function updatePlayerPosition(event){ 
+	for (i=0;i<players.length;i++){
+		if (event.charCode == players[i]["charCode"]) {
+			players[i]["position"]++;
+		}
+	}	
+	console.log(players);
+}
 
 
