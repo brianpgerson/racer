@@ -1,5 +1,5 @@
 //each
-function each(list, callback){
+function each(callback, list){
 	if (Array.isArray(list)) {
 		for (i=0; i<list.length; i++){
 			callback(list[i]);
@@ -15,7 +15,7 @@ function each(list, callback){
 
 
 //map
-function map(list, callback){
+function map(callback, list){
 	var results = []
 	if (Array.isArray(list)){
 		for (i=0; i<list.length; i++){
@@ -31,6 +31,27 @@ function map(list, callback){
 	return results;
 }
 
+
+//filter
+function filter(callback, list){
+	var filteredList = []
+	if (Array.isArray(list)){
+		for (i=0; i<list.length; i++){
+			if (callback(list[i])) {
+				filteredList.push(list[i]);
+			}
+		}
+	} else {
+		for (var key in list){
+			if (list.hasOwnProperty(key)){
+				if (callback(list[key])) {
+					filteredList.push(list[key]);
+				}
+			}
+		}
+	} 
+	return filteredList;
+}
 
 
 //reduce
@@ -53,7 +74,7 @@ function map(list, callback){
 
 <ul id="test"><li>cool</li><li>cool</li><li>cool</li></ul>
 
-//pluc
+//pluck
 
 
 
