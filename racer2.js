@@ -62,8 +62,7 @@ function show(section){
 // create track section
 //----------------
 
-function setUpTrack(playerNum) {
-	var trackLength = 5;
+function setUpTrack(playerNum, trackLength) {
 	var block = createColumn(trackLength);
 	for (i=0;i<playerNum;i++){
 		var playerColumns = "<ul class = 'players' id = 'player"+i+"'>" + block + "</ul>";
