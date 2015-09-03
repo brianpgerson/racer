@@ -1,5 +1,5 @@
 //each
-function each(callback, list){
+function each(callback, list, context){
 	if (Array.isArray(list)) {
 		for (i=0; i<list.length; i++){
 			callback(list[i]);
@@ -7,7 +7,11 @@ function each(callback, list){
 	} else {
 		for (var key in list){
 			if (list.hasOwnProperty(key)){
-				callback(list[key])
+				if (context != undefined){
+					callback.call(context, key);
+				} else {
+					callback(list[key]);
+				}
 			}
 		}
 	}
@@ -16,19 +20,19 @@ function each(callback, list){
 
 //map
 function map(callback, list){
-	var results = []
+	var mappedArray = []
 	if (Array.isArray(list)){
 		for (i=0; i<list.length; i++){
-			results.push(callback(list[i]));
+			mappedArray.push(callback(list[i]));
 		}
 	} else {
 		for (var key in list){
 			if (list.hasOwnProperty(key)){
-				results.push(callback(list[key]));
+				mappedArray.push(callback(list[key]));
 			}
 		}
 	}
-	return results;
+	return mappedArray;
 }
 
 
@@ -55,7 +59,14 @@ function filter(callback, list){
 
 
 //reduce
+function reduce(callback, list){
 
+	if (Array.isArray(list)) {
+
+	} else {
+
+	}
+}
 
 
 //find
@@ -72,7 +83,6 @@ function filter(callback, list){
 
 //some
 
-<ul id="test"><li>cool</li><li>cool</li><li>cool</li></ul>
 
 //pluck
 
