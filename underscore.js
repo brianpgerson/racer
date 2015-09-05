@@ -1,5 +1,8 @@
 //each
 function each(callback, list, context){
+	if (context) {
+		callback = callback.bind(context)
+	}
 	if (Array.isArray(list)) {
 		for (i=0; i<list.length; i++){
 			callback(list[i]);
@@ -7,11 +10,7 @@ function each(callback, list, context){
 	} else {
 		for (var key in list){
 			if (list.hasOwnProperty(key)){
-				if (context != undefined){
-					callback.call(context, key);
-				} else {
-					callback(list[key]);
-				}
+				callback(list[key]);
 			}
 		}
 	}
@@ -19,7 +18,10 @@ function each(callback, list, context){
 
 
 //map
-function map(callback, list){
+function map(callback, list, context){
+	if (context) {
+		callback = callback.bind(context)
+	}
 	var mappedArray = []
 	if (Array.isArray(list)){
 		for (i=0; i<list.length; i++){
@@ -37,7 +39,10 @@ function map(callback, list){
 
 
 //filter
-function filter(callback, list){
+function filter(callback, list, context){
+	if (context) {
+		callback = callback.bind(context)
+	}
 	var filteredList = []
 	if (Array.isArray(list)){
 		for (i=0; i<list.length; i++){
@@ -53,20 +58,14 @@ function filter(callback, list){
 				}
 			}
 		}
-	} 
+	}
 	return filteredList;
 }
 
 
+
 //reduce
-function reduce(callback, list){
 
-	if (Array.isArray(list)) {
-
-	} else {
-
-	}
-}
 
 
 //find
