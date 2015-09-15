@@ -1,8 +1,6 @@
 //each
 function each(callback, list, context){
-	if (context) {
-		callback = callback.bind(context)
-	}
+	var callback = context ? callback.bind(context) : callback;
 	if (Array.isArray(list)) {
 		for (i=0; i<list.length; i++){
 			callback(list[i]);
@@ -19,9 +17,7 @@ function each(callback, list, context){
 
 //map
 function map(callback, list, context){
-	if (context) {
-		callback = callback.bind(context)
-	}
+	var callback = context ? callback.bind(context) : callback;
 	var mappedArray = []
 	if (Array.isArray(list)){
 		for (i=0; i<list.length; i++){
@@ -40,9 +36,7 @@ function map(callback, list, context){
 
 //filter
 function filter(callback, list, context){
-	if (context) {
-		callback = callback.bind(context)
-	}
+	var callback = context ? callback.bind(context) : callback;
 	var filteredList = []
 	if (Array.isArray(list)){
 		for (i=0; i<list.length; i++){
@@ -65,7 +59,24 @@ function filter(callback, list, context){
 
 
 //reduce
-
+function reduce(callback, list, memo, context){
+	var callback = context ? callback.bind(context) : callback;
+	if (Array.isArray(list)){
+		var total = memo ? memo : 0;
+		for (i=0; i<list.length; i++){
+			console.log(total); 
+			var total = callback(total, list[i]);
+		}
+	} else {
+		var total = memo ? memo : 0;
+		for (var key in list){
+			if (list.hasOwnProperty(key)){
+				var total = callback(total, list[key]);
+			}
+		}
+	}
+	return total;
+}
 
 
 //find
