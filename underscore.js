@@ -80,22 +80,100 @@ function reduce(callback, list, memo, context){
 
 
 //find
+function find(callback, list, context){
+	var callback = context ? callback.bind(context) : callback;
+	if (Array.isArray(list)){
+		for (i=0; i<list.length; i++){
+			if (callback(list[i])) {
+				return list[i];
+			}
+		}
+	} else {
+		for (var key in list){
+			if (callback(list[key])){
+				return list[key];
+			}
+		}
+	}
+}
 
 
 
 //reject
-
-
+function reject(callback, list, context){
+	var callback = context ? callback.bind(context) : callback;
+	var rejects = [];
+	if (Array.isArray(list)){
+		for (i=0; i<list.length; i++){
+			if (!callback(list[i])){
+				rejects.push(list[i]);
+			}
+		}
+	} else {
+		for (var key in list){
+			if (!callback(list[key])){
+				rejects.push(list[key]);
+			}
+		}
+	}
+	return rejects;
+}
 
 //every
-
+function every(callback, list, context){
+	var callback = context ? callback.bind(context) : callback;
+	if (Array.isArray(list)){
+		for (i=0; i<list.length; i++){
+			if (!callback(list[i])){
+				return false;
+			}
+		}
+	} else {
+		for (var key in list){
+			if (!callback(list[i])){
+				return false
+			}
+		}
+	} 
+	return true;
+}
 
 
 //some
+function some(callback, list, context){
+	var callback = context ? callback.bind(context) : callback;
+	if (Array.isArray(list)){
+		for (i=0; i<list.length; i++){
+			if (callback(list[i])){
+				return true;
+			}
+		}
+	} else {
+		for (var key in list){
+			if (callback(list[i])){
+				return true;
+			}
+		}
+	} 
+	return false;
+}
 
 
 //pluck
-
+function pluck(list, prop){
+	var results = [];
+	if (Array.isArray(list)){
+		for (i=0; i<list.length; i++){
+			debugger;
+			for (var key in list[i]){
+				if (key == prop){
+					results.push(list[i][prop])
+				}			
+			}
+		}
+	}
+	return results;
+}
 
 
 //sortby
