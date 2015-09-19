@@ -164,7 +164,6 @@ function pluck(list, prop){
 	var results = [];
 	if (Array.isArray(list)){
 		for (i=0; i<list.length; i++){
-			debugger;
 			for (var key in list[i]){
 				if (key == prop){
 					results.push(list[i][prop])
@@ -176,8 +175,27 @@ function pluck(list, prop){
 }
 
 
+
 //sortby
-
-
+function sortBy(callback, list, context){
+	var callback = context ? callback.bind(context) : callback;
+	function comparisonValue(a, b) {
+		return callback(a) - callback(b);
+	}	
+	function comparisonString(a, b){
+		if (a[callback] > b[callback]){
+			return 1;
+		}
+		if (a[callback] < b[callback]){
+			return -1;
+		}else {
+			return 0;
+		}
+	}
+	if (Array.isArray(list)){	
+		typeof(callback) == "string" ? newList = list.sort(comparisonString) : newList = list.sort(comparisonValue);
+	}  
+	return newList;
+}
 
 //groupby
