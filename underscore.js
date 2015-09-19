@@ -175,7 +175,6 @@ function pluck(list, prop){
 }
 
 
-
 //sortby
 function sortBy(callback, list, context){
 	var callback = context ? callback.bind(context) : callback;
@@ -197,5 +196,3 @@ function sortBy(callback, list, context){
 	}  
 	return newList;
 }
-
-//groupby
